@@ -92,25 +92,80 @@ window.LHDS = {
     }
   ],
 
-  /* ---------- Convocatorias propias ---------- */
+  /* ---------- Convocatorias propias ----------
+     Cada convocatoria tiene su propia página: convocatoria.html?id=<id>
+     "bases" son las secciones que se muestran en esa página.
+     [EJEMPLO] Reemplazar fechas y textos por las bases oficiales. */
   convocatoriasPropias: [
     {
+      id: "microfono-abierto",
       titulo: "Lecturas para el micrófono abierto",
       bajada: "Poesía, prosa, canción o performance. Buscamos voces que nunca se han subido a un escenario y voces que ya conocen el camino.",
-      cierre: "2026-11-10",
-      bases: "docs/bases-microfono-abierto.pdf"
+      apertura: "2026-11-01",
+      cierre: "2026-11-30",
+      resultados: "2026-12-05",
+      pdf: "docs/bases-microfono-abierto.pdf",
+      bases: [
+        { titulo: "Quiénes pueden participar", lista: [
+          "Personas de 16 años en adelante que vivan en el Área Metropolitana de Monterrey.",
+          "No se necesita experiencia previa ni trayectoria publicada.",
+          "Menores de edad necesitan autorización de madre, padre o tutor."
+        ] },
+        { titulo: "Qué puedes presentar", lista: [
+          "Poesía, prosa, canción, monólogo o performance.",
+          "Un máximo de 5 minutos por participante.",
+          "Textos propios e inéditos o publicados por ti."
+        ] },
+        { titulo: "Cómo inscribirte", texto: "Llena el formulario de inscripción con tus datos y una breve descripción de lo que vas a presentar. Te confirmaremos tu lugar por correo." },
+        { titulo: "Selección", texto: "Los lugares se asignan por orden de inscripción hasta completar el cupo. Si el cupo se llena, tu registro quedará en lista de espera para la siguiente edición." },
+        { titulo: "Código de convivencia", texto: "La Hermana de Shakespeare es un espacio seguro, no separatista y de puertas abiertas. No se aceptan discursos de odio, acoso ni propaganda partidista." }
+      ]
     },
     {
+      id: "bazar",
       titulo: "Bazar de arte y fanzines",
       bajada: "Mesa para ilustración, gráfica, fanzines, libros y objetos hechos a mano en nuestras próximas ediciones.",
+      apertura: "2026-11-01",
       cierre: "2026-11-20",
-      bases: "docs/bases-bazar.pdf"
+      resultados: "2026-11-25",
+      pdf: "docs/bases-bazar.pdf",
+      bases: [
+        { titulo: "Quiénes pueden participar", lista: [
+          "Artistas, editoriales independientes y colectivos del Área Metropolitana de Monterrey.",
+          "Todo lo que se venda debe ser de producción propia."
+        ] },
+        { titulo: "Qué incluye tu lugar", lista: [
+          "Media mesa durante todo el evento.",
+          "Difusión de tu proyecto en nuestras redes.",
+          "Cuota de recuperación por definir."
+        ] },
+        { titulo: "Cómo inscribirte", texto: "Llena el formulario con el nombre de tu proyecto, tus redes y fotos de lo que venderías." },
+        { titulo: "Selección", texto: "Un comité del colectivo revisa las propuestas buscando variedad de disciplinas y priorizando proyectos emergentes." },
+        { titulo: "Código de convivencia", texto: "No se aceptan productos o mensajes con discursos de odio ni propaganda partidista." }
+      ]
     },
     {
+      id: "exposicion",
       titulo: "Exposición colectiva · Duodécima edición",
       bajada: "Pintura, fotografía, ilustración y técnica mixta de artistas emergentes del Área Metropolitana de Monterrey.",
+      apertura: "2026-11-01",
       cierre: "2026-12-01",
-      bases: "docs/bases-exposicion.pdf"
+      resultados: "2026-12-08",
+      pdf: "docs/bases-exposicion.pdf",
+      bases: [
+        { titulo: "Quiénes pueden participar", lista: [
+          "Artistas emergentes mayores de 16 años del Área Metropolitana de Monterrey.",
+          "Se puede participar de forma individual o colectiva."
+        ] },
+        { titulo: "Qué puedes presentar", lista: [
+          "Hasta 2 obras: pintura, fotografía, ilustración, gráfica o técnica mixta.",
+          "Formato máximo de 100 × 100 cm por obra.",
+          "Las obras deben estar listas para colgarse."
+        ] },
+        { titulo: "Cómo inscribirte", texto: "Llena el formulario con tus datos, una foto de cada obra, su técnica y medidas, y una breve semblanza." },
+        { titulo: "Selección", texto: "Un comité del colectivo y artistas invitadxs eligen las obras. Los resultados se publican en nuestras redes y se avisa por correo." },
+        { titulo: "Código de convivencia", texto: "La Hermana de Shakespeare es un espacio seguro: no se aceptan obras con discursos de odio ni propaganda partidista." }
+      ]
     }
   ],
 

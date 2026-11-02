@@ -132,8 +132,26 @@
     if (!e) { el.remove(); return; }
     el.innerHTML = '<div class="d">' + e._d.getDate() + '<small>' + MESES[e._d.getMonth()] + '</small></div>' +
       '<div><div class="m">Próximo evento · ' + hora12(e.hora) + '</div><div class="t">' + esc(e.titulo) + '</div>' +
-      '<div style="font-size:14px;color:#cfc9bd">' + esc(e.lugar) + '</div></div>';
+      '<div style="font-size:14px;color:#cfc9bd">' + esc(e.lugar) + '</div></div>' +
+      '<div class="countdown" aria-label="Tiempo para el evento">' +
+        '<span><b data-cd="d">0</b>días</span><span><b data-cd="h">00</b>horas</span>' +
+        '<span><b data-cd="m">00</b>min</span><span><b data-cd="s">00</b>seg</span>' +
+      '</div>';
     $$("[data-next-href]").forEach(function (a) { a.href = "#cartelera"; });
+
+    // Contador regresivo: se actualiza cada segundo
+    var pad = function (n) { return (n < 10 ? "0" : "") + n; };
+    var tick = function () {
+      var ms = Math.max(0, e._d - new Date());
+      var t = Math.floor(ms / 1000);
+      $('[data-cd="d"]', el).textContent = Math.floor(t / 86400);
+      $('[data-cd="h"]', el).textContent = pad(Math.floor(t / 3600) % 24);
+      $('[data-cd="m"]', el).textContent = pad(Math.floor(t / 60) % 60);
+      $('[data-cd="s"]', el).textContent = pad(t % 60);
+      if (ms === 0) { clearInterval(timer); $(".countdown", el).textContent = "¡Hoy es el evento!"; }
+    };
+    var timer = setInterval(tick, 1000);
+    tick();
   }
 
   /* ---------- Convocatorias ---------- */
@@ -146,7 +164,7 @@
           '<div class="call-status"><span class="open">Abierta</span><span>Cierra ' + d.getDate() + " " + MESES_L[d.getMonth()] + '</span></div>' +
           '<h3>' + esc(c.titulo) + '</h3><p>' + esc(c.bajada) + '</p>' +
           '<div class="call-actions">' +
-            '<a class="btn btn--sm btn--ghost" href="' + esc(c.bases) + '" download>' + ICON.down + 'Bases (PDF)</a>' +
+            '<a class="btn btn--sm btn--ghost" href="convocatoria.html?id=' + encodeURIComponent(c.id) + '">Ver bases ' + ICON.arrow + '</a>' +
             '<button class="btn btn--sm" type="button" data-apply="' + i + '">Inscribirme</button>' +
           '</div></article>';
       }).join("");
@@ -208,6 +226,64 @@
         .then(done)
         .catch(function () { alert("No se pudo enviar. Escríbenos por correo, por favor."); });
     });
+  }
+
+  /* ---------- Página de una convocatoria (convocatoria.html?id=...) ---------- */
+  function renderConvocatoriaPage() {
+    var box = $("#convocatoria");
+    if (!box) return;
+    var lista = C.convocatoriasPropias || [];
+    var id = new URLSearchParams(location.search).get("id");
+    var idx = -1;
+    lista.forEach(function (c, i) { if (c.id === id) idx = i; });
+    if (idx < 0) {
+      box.innerHTML = '<section class="page-hero"><div class="wrap"><p class="kicker">Convocatorias</p>' +
+        '<h1 class="conv-title">No encontramos esa convocatoria</h1>' +
+        '<div class="conv-actions"><a class="btn btn--light" href="index.html">← Volver al inicio</a>' +
+        '<a class="btn btn--outline-light" href="index.html#convocatorias">Ver todas las convocatorias</a></div></div></section>';
+      return;
+    }
+    var c = lista[idx];
+    var fecha = function (f) { var d = parseFecha(f); return d.getDate() + " de " + MESES_L[d.getMonth()] + " de " + d.getFullYear(); };
+    document.title = c.titulo + " · Convocatoria · La Hermana de Shakespeare";
+
+    var secciones = (c.bases || []).map(function (b, i) {
+      var cuerpo = b.lista
+        ? "<ul>" + b.lista.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>"
+        : "<p>" + esc(b.texto) + "</p>";
+      return '<section class="base"><span class="base-num">' + (i + 1) + '</span><div><h2>' + esc(b.titulo) + "</h2>" + cuerpo + "</div></section>";
+    }).join("");
+
+    var otras = lista.filter(function (o) { return o.id !== c.id; }).map(function (o) {
+      return '<li><a href="convocatoria.html?id=' + encodeURIComponent(o.id) + '">' + esc(o.titulo) + " " + ICON.arrow + "</a></li>";
+    }).join("");
+
+    box.innerHTML =
+      '<section class="page-hero conv-hero"><div class="wrap">' +
+        '<a class="back-link" href="index.html#convocatorias">← Convocatorias</a>' +
+        '<p class="kicker"><span>Convocatoria <span class="open-dot">abierta</span></span></p>' +
+        '<h1 class="conv-title">' + esc(c.titulo) + "</h1>" +
+        '<p class="conv-lead">' + esc(c.bajada) + "</p>" +
+        '<div class="conv-actions">' +
+          '<button class="btn btn--grad" type="button" data-apply="' + idx + '">Inscribirme</button>' +
+          '<a class="btn btn--outline-light" href="' + esc(c.pdf) + '" download>' + ICON.down + "Descargar bases (PDF)</a>" +
+          '<a class="btn btn--outline-light" href="index.html">← Volver al inicio</a>' +
+        "</div>" +
+      "</div></section>" +
+      '<div class="section"><div class="wrap conv-grid">' +
+        '<div class="bases"><p class="kicker">Bases</p>' + secciones + "</div>" +
+        '<aside class="conv-aside">' +
+          '<div class="fechas"><h3>Fechas clave</h3><dl>' +
+            "<dt>Apertura</dt><dd>" + fecha(c.apertura) + "</dd>" +
+            "<dt>Cierre</dt><dd>" + fecha(c.cierre) + "</dd>" +
+            "<dt>Resultados</dt><dd>" + fecha(c.resultados) + "</dd>" +
+          "</dl></div>" +
+          '<button class="btn btn--grad" type="button" data-apply="' + idx + '" style="width:100%;justify-content:center">Inscribirme</button>' +
+          '<a class="btn btn--ghost" href="' + esc(c.pdf) + '" download style="width:100%;justify-content:center">' + ICON.down + "Descargar PDF</a>" +
+          '<p class="aside-note">¿Dudas? Escríbenos a <a href="#" data-mail data-mail-text>nuestro correo</a>.</p>' +
+          (otras ? '<div class="otras"><h3>Otras convocatorias</h3><ul>' + otras + "</ul></div>" : "") +
+        "</aside>" +
+      "</div></div>";
   }
 
   /* ---------- Revista ---------- */
@@ -306,6 +382,7 @@
     }
   }
 
+  renderConvocatoriaPage();
   fillConfig();
   initMenu();
   initFloat();

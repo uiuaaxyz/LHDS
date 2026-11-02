@@ -187,7 +187,7 @@ a { color: inherit; }
   font-size: clamp(26px, 4.2vw, 54px); line-height: 1; letter-spacing: -.01em;
   max-width: 20ch; margin: 0 0 18px;
 }
-.hero h1 mark { background: var(--pink); color: var(--ink); padding: 0 .12em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.hero h1 mark { background: var(--pink); color: #fff; padding: 0 .12em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .hero p.sub { font-size: clamp(16px, 1.6vw, 20px); max-width: 52ch; margin: 0 0 28px; color: #e9e4d9; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .hero-strip {
@@ -534,3 +534,93 @@ dialog.modal::backdrop { background: rgba(14,13,12,.7); }
 .logo small { max-width: none; white-space: nowrap; }
 @media (max-width: 1180px) { .logo small { display: none; } }
 .logo small { display: none; }
+
+/* =========================================================
+   CONTADOR DEL PRÓXIMO EVENTO
+   ========================================================= */
+.next-up { grid-template-columns: auto 1fr; }
+.countdown {
+  grid-column: 1 / -1;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
+  border-top: 1px solid rgba(243,239,230,.25); padding-top: 12px;
+  font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: #cfc9bd;
+}
+.countdown span { text-align: center; background: rgba(14,13,12,.45); padding: 8px 4px; }
+.countdown b {
+  display: block; font-family: var(--font-display); font-size: 28px; line-height: 1;
+  color: #fff; letter-spacing: 0; margin-bottom: 4px; font-variant-numeric: tabular-nums;
+}
+.countdown span:first-child b { color: var(--pink); }
+
+/* =========================================================
+   SOBRE NOSOTRAS CON MÁS COLOR
+   ========================================================= */
+#nosotras { position: relative; background:
+  radial-gradient(circle at 92% 8%, rgba(122,44,240,.16), transparent 38%),
+  radial-gradient(circle at 4% 92%, rgba(236,31,140,.14), transparent 40%),
+  var(--paper); }
+#nosotras .section-title .goth { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.mv div { border: 0; color: #fff; }
+.mv div:nth-child(1) { background: var(--pink); }
+.mv div:nth-child(2) { background: var(--violet); }
+.mv p { color: #fff; }
+.team li { border-bottom: 0; border-left: 5px solid var(--pink); padding-left: 12px; margin: 0 0 10px; background: rgba(255,255,255,.6); }
+.team li:nth-child(5n+2) { border-left-color: var(--violet); }
+.team li:nth-child(5n+3) { border-left-color: var(--blue); }
+.team li:nth-child(5n+4) { border-left-color: var(--teal); }
+.team li:nth-child(5n+5) { border-left-color: var(--orange); }
+.team { border-top: 0; gap: 0 10px; }
+.sede { background: var(--blue); }
+.sede p { color: #e6ecff; }
+.sede .kicker { color: #fff !important; }
+.timeline { border-color: var(--ink); }
+.timeline div { color: #fff; }
+.timeline div span { color: inherit; opacity: .92; }
+.timeline div:nth-child(1) { background: var(--pink); }
+.timeline div:nth-child(2) { background: var(--violet); }
+.timeline div:nth-child(3) { background: var(--blue); }
+.timeline div:nth-child(4) { background: #0f9e93; }
+.timeline div:nth-child(5) { background: #2a9d52; }
+.timeline div:nth-child(6) { background: var(--orange); color: var(--ink); }
+.timeline div:nth-child(7) { background: var(--ink); }
+
+/* =========================================================
+   PÁGINA DE CONVOCATORIA
+   ========================================================= */
+.conv-hero { background:
+  linear-gradient(180deg, rgba(14,13,12,.2), rgba(14,13,12,.85)),
+  var(--grad); }
+.back-link { display: table; margin-bottom: 18px; font-family: var(--font-mono); font-size: 13px; text-transform: uppercase; letter-spacing: .1em; text-decoration: none; color: #fff; opacity: .85; }
+.back-link:hover { opacity: 1; text-decoration: underline; }
+.conv-hero .kicker { color: #fff; }
+.open-dot { color: #7dffb0; }
+.conv-title { font-family: var(--font-display); text-transform: uppercase; font-size: clamp(34px, 6vw, 76px); line-height: .95; margin: 0 0 16px; max-width: 18ch; color: #fff; }
+.conv-lead { font-size: clamp(17px, 1.8vw, 21px); max-width: 60ch; color: #f1ecf8; margin: 0 0 28px; }
+.conv-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.conv-grid { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: clamp(28px, 5vw, 64px); align-items: start; }
+.base { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 16px; padding: 24px 0; border-top: 2px solid var(--ink); }
+.base:last-child { border-bottom: 2px solid var(--ink); }
+.base-num { width: 44px; height: 44px; display: grid; place-items: center; background: var(--pink); color: #fff; font-family: var(--font-display); font-size: 20px; }
+.base:nth-child(3n+3) .base-num { background: var(--violet); }
+.base:nth-child(3n+4) .base-num { background: var(--blue); }
+.base h2 { margin: 6px 0 10px; font-family: var(--font-display); text-transform: uppercase; font-size: 22px; line-height: 1.1; }
+.base p, .base ul { margin: 0; color: var(--ink-soft); }
+.base ul { padding-left: 20px; }
+.base li { margin-bottom: 6px; }
+.conv-aside { position: sticky; top: calc(var(--header-h) + 20px); display: grid; gap: 12px; }
+.fechas { border: 2px solid var(--ink); background: #fff; padding: 20px; }
+.fechas h3, .otras h3 { margin: 0 0 12px; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .14em; }
+.fechas dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 8px 14px; }
+.fechas dt { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; color: var(--muted); padding-top: 2px; }
+.fechas dd { margin: 0; font-weight: 700; }
+.aside-note { font-size: 14px; color: var(--muted); margin: 4px 0 0; }
+.otras { margin-top: 14px; }
+.otras ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid #c9c1b2; }
+.otras li { border-bottom: 1px solid #c9c1b2; }
+.otras a { display: flex; justify-content: space-between; gap: 10px; padding: 12px 0; text-decoration: none; font-weight: 700; }
+.otras a:hover { color: var(--pink); }
+.otras svg { width: 16px; height: 16px; flex: none; }
+@media (max-width: 900px) {
+  .conv-grid { grid-template-columns: minmax(0, 1fr); }
+  .conv-aside { position: static; }
+}
