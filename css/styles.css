@@ -187,7 +187,7 @@ a { color: inherit; }
   font-size: clamp(26px, 4.2vw, 54px); line-height: 1; letter-spacing: -.01em;
   max-width: 20ch; margin: 0 0 18px;
 }
-.hero h1 mark { background: var(--teal); color: var(--ink); padding: 0 .12em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.hero h1 mark { background: var(--pink); color: var(--ink); padding: 0 .12em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .hero p.sub { font-size: clamp(16px, 1.6vw, 20px); max-width: 52ch; margin: 0 0 28px; color: #e9e4d9; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .hero-strip {
