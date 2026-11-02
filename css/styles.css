@@ -555,34 +555,31 @@ dialog.modal::backdrop { background: rgba(14,13,12,.7); }
 /* =========================================================
    SOBRE NOSOTRAS CON MÁS COLOR
    ========================================================= */
-#nosotras { position: relative; background:
-  radial-gradient(circle at 92% 8%, rgba(122,44,240,.16), transparent 38%),
-  radial-gradient(circle at 4% 92%, rgba(236,31,140,.14), transparent 40%),
-  var(--paper); }
 #nosotras .section-title .goth { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.mv div { border: 0; color: #fff; }
-.mv div:nth-child(1) { background: var(--pink); }
-.mv div:nth-child(2) { background: var(--violet); }
-.mv p { color: #fff; }
-.team li { border-bottom: 0; border-left: 5px solid var(--pink); padding-left: 12px; margin: 0 0 10px; background: rgba(255,255,255,.6); }
-.team li:nth-child(5n+2) { border-left-color: var(--violet); }
-.team li:nth-child(5n+3) { border-left-color: var(--blue); }
-.team li:nth-child(5n+4) { border-left-color: var(--teal); }
-.team li:nth-child(5n+5) { border-left-color: var(--orange); }
-.team { border-top: 0; gap: 0 10px; }
-.sede { background: var(--blue); }
-.sede p { color: #e6ecff; }
-.sede .kicker { color: #fff !important; }
-.timeline { border-color: var(--ink); }
-.timeline div { color: #fff; }
-.timeline div span { color: inherit; opacity: .92; }
-.timeline div:nth-child(1) { background: var(--pink); }
-.timeline div:nth-child(2) { background: var(--violet); }
-.timeline div:nth-child(3) { background: var(--blue); }
-.timeline div:nth-child(4) { background: #0f9e93; }
-.timeline div:nth-child(5) { background: #2a9d52; }
-.timeline div:nth-child(6) { background: var(--orange); color: var(--ink); }
-.timeline div:nth-child(7) { background: var(--ink); }
+/* Misión, visión y sede: mismas tarjetas que las convocatorias (borde negro + franja degradada) */
+.mv div, .sede { position: relative; padding-top: 26px; }
+.mv div::before, .sede::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 6px; background: var(--grad); }
+.mv h3 { display: flex; align-items: center; gap: 10px; }
+.mv h3::before { content: ""; width: 12px; height: 12px; background: var(--pink); flex: none; }
+.mv div:nth-child(2) h3::before { background: var(--violet); }
+.team { border-top: 0; position: relative; padding-top: 6px; }
+.team::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--grad); }
+.team b::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 8px; vertical-align: middle; background: var(--pink); }
+.team li:nth-child(5n+2) b::before { background: var(--violet); }
+.team li:nth-child(5n+3) b::before { background: var(--blue); }
+.team li:nth-child(5n+4) b::before { background: var(--teal); }
+.team li:nth-child(5n+5) b::before { background: var(--green); }
+.team span { padding-left: 16px; display: block; }
+/* Línea de tiempo: franja degradada continua arriba y cada año en un color de la paleta */
+.timeline { position: relative; border-top-width: 0; padding-top: 6px; background: #fff; }
+.timeline::before { content: ""; position: absolute; left: -2px; right: -2px; top: 0; height: 6px; background: var(--grad); }
+.timeline div:nth-child(1) b { color: var(--pink); }
+.timeline div:nth-child(2) b { color: #a24ad8; }
+.timeline div:nth-child(3) b { color: var(--violet); }
+.timeline div:nth-child(4) b { color: #5450f7; }
+.timeline div:nth-child(5) b { color: var(--blue); }
+.timeline div:nth-child(6) b { color: #0fa89c; }
+.timeline div:nth-child(7) b { color: #2a9d52; }
 
 /* =========================================================
    PÁGINA DE CONVOCATORIA
